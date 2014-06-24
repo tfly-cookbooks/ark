@@ -11,10 +11,10 @@ Feature: Ark Resource - Install
     And the remote file resource, "/var/chef/cache/test_install-2.tar.gz", to be created
     And for that resource to notify the execute resource, "unpack /var/chef/cache/test_install-2.tar.gz" to run
 
-    And the execute resource, "unpack /var/chef/cache/test_install-2.tar.gz", to not run
+    And the execute resource, "unpack /var/chef/cache/test_install-2.tar.gz", not to run
     But for that resource to notify the execute resource, "set owner on /usr/local/test_install-2" to run
 
-    And the execute resource, "set owner on /usr/local/test_install-2", to not run
+    And the execute resource, "set owner on /usr/local/test_install-2", not to run
 
-    And the template resource, "/etc/profile.d/test_install.sh", to not create
-    And the ruby block resource, "adding '/usr/local/test_install-2/bin' to chef-client ENV['PATH']", to not run
+    And the template resource, "/etc/profile.d/test_install.sh", not to create
+    And the ruby block resource, "adding '/usr/local/test_install-2/bin' to chef-client ENV['PATH']", not to run

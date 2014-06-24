@@ -7,7 +7,7 @@ Then(/^(?:I expect )?for that resource to notify the execute resource,(?: named)
 end
 
 
-Then(/^(?:I expect )?(?:an?|the) ([^,]+) resource,(?: named)?\s?"(.*?)", to( not)?(?: be)? (.+)$/) do |resource,name,negation,action|
+Then(/^(?:I expect )?(?:an?|the) ([^,]+) resource,(?: named)?\s?"(.*?)",( not)? to(?: be)? (.+)$/) do |resource,name,negation,action|
   negation = negation =~ / ?not/
   expectation = negation ? "not_to" : "to"
   resource = parse_resource(resource)
