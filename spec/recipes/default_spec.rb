@@ -20,6 +20,10 @@ describe_recipe "ark::default" do
     expect(chef_run).not_to include_recipe("7-zip")
   end
 
+  it "does include the build-essential recipe" do
+    expect(chef_run).to include_recipe("build-essential")
+  end
+
   context "sets default attributes" do
 
     it "apache mirror" do

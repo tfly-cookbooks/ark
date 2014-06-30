@@ -18,6 +18,8 @@
 # limitations under the License.
 #
 
+include_recipe "build-essential" unless platform_family?('windows')
+
 Array(node['ark']['package_dependencies']).each do |pkg|
   package pkg
 end
