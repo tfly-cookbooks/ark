@@ -13,8 +13,12 @@ module Ark
     end
 
     def home_dir
-      prefix_home = resource.prefix_home || prefix_home_from_node_in_run_context
-      ::File.join(prefix_home, resource.name)
+      if resource.home_dir.nil? || resource.home_dir.empty?
+        prefix_home = resource.prefix_home || prefix_home_from_node_in_run_context
+        ::File.join(prefix_home, resource.name)
+      else
+        resource.home_dir
+      end
     end
 
     def version
@@ -82,7 +86,7 @@ module Ark
     end
 
     def default_version
-      "1"
+      '1'
     end
 
     def file_cache_path

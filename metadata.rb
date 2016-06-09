@@ -1,19 +1,20 @@
 name             'ark'
-maintainer       'Franklin Webber'
-maintainer_email 'frank@getchef.com'
+maintainer       'Chef Software, Inc.'
+maintainer_email 'cookbooks@chef.io'
 license          'Apache 2.0'
-description      'Installs/Configures ark'
+description      'Provides a custom resource for installing runtime artifacts in a predictable fashion'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          '0.9.1'
+version          '1.1.0'
 
-def supported_operating_systems
-  %w( debian ubuntu centos redhat fedora windows )
+recipe 'ark::default', 'Installs packages needed by the custom resource'
+
+%w(ubuntu debian redhat centos suse scientific oracle amazon windows mac_os_x smartos freebsd).each do |os|
+  supports os
 end
 
-supported_operating_systems.each { |os| supports os }
-
-recipe 'ark::default', 'Installs and configures ark'
-
 depends 'build-essential'
-depends 'windows'
-depends '7-zip'
+depends 'windows' # for windows os
+depends 'seven_zip' # for windows os
+
+source_url 'https://github.com/chef-cookbooks/ark' if respond_to?(:source_url)
+issues_url 'https://github.com/chef-cookbooks/ark/issues' if respond_to?(:issues_url)

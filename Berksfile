@@ -1,12 +1,11 @@
-source "http://api.berkshelf.com"
+source 'https://supermarket.chef.io'
 
 metadata
 
 group :integration do
+  cookbook 'yum'
   cookbook 'apt'
-  cookbook 'minitest-handler'
-  cookbook 'build-essential'
+  cookbook 'freebsd'
 end
 
-
-cookbook "ark_spec", path: "spec/fixtures/cookbooks/ark_spec"
+cookbook 'ark_spec', path: 'spec/fixtures/cookbooks/ark_spec'

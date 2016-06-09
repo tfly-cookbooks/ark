@@ -29,16 +29,17 @@ module Ark
       tmpdir = make_temp_directory
       cmd = sevenzip_command_builder(tmpdir, 'e')
 
-      cmd += " && "
-      currdir = tmpdir.gsub('/', '\\')
+      cmd += ' && '
+      currdir = tmpdir.tr('/', '\\')
 
       1.upto(resource.strip_components).each do |count|
         cmd += "for /f %#{count} in ('dir /ad /b \"#{currdir}\"') do "
         currdir += "\\%#{count}"
       end
 
-      cmd += "xcopy \"#{currdir}\" \"#{resource.home_dir}\" /s /e"
+      cmd += "#{ENV.fetch('SystemRoot')}\\System32\\xcopy \"#{currdir}\" \"#{resource.home_dir}\" /s /e"
     end
+    # rubocop:enable Metrics/AbcSize
 
     def sevenzip_binary
       resource.run_context.node['ark']['tar']
@@ -52,7 +53,7 @@ module Ark
       if resource.extension =~ /tar.gz|tgz|tar.bz2|tbz|tar.xz|txz/
         " -so | #{sevenzip_binary} x -aoa -si -ttar"
       else
-        ""
+        ''
       end
     end
 
